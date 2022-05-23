@@ -8,7 +8,7 @@ export const GifExpertApp = () => {
     
     return (
         <>
-            <label className='fs-2 fw-bold'>Buscador</label>
+            <label className='fs-2 fw-bold animate__animated animate__tada'>Buscador</label>
             <AddCategory setCategories={setCategories} />
             <hr />
             {categories.map(category => <GifGrid key={category} category={category} />)}

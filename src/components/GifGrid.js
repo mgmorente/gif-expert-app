@@ -1,28 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import CardGif from './CardGif';
+import CardGif from './GifCard';
+import { getImages } from '../helpers/getImages';
 
 const GifGrid = ({ category }) => {
-    const key = 'mDakXXWPvZIWXuoWHEVnBiwVNrTPGuMP';
-    const api = `http://api.giphy.com/v1/gifs/search?api_key=${key}&q=${category}&limit=10`
-
+    
     const [images, setImages] = useState([])
 
     useEffect(() => {
-        getImages();
+        getImages(category)
+            .then(gifs => setImages(gifs))
     }, [category])
-
-
-    const getImages = async () => {
-        const resp = await fetch(api);
-        const { data } = await resp.json();
-        const gifs = data.map(img => ({
-            id: img.id,
-            title: img.title,
-            url: img.images.downsized_medium.url
-        }));
-        setImages([...gifs])
-    }
 
     return (
         <div className="row g-0 justify-content-center mb-5">
